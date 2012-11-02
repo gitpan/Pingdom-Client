@@ -1,0 +1,13 @@
+
+
+This archive contains the distribution Pingdom-Client,
+version 0.11:
+
+  a perl implementation of a client for the Pingdom REST API.
+
+This software is copyright (c) 2012 by Dominik Schulz.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+

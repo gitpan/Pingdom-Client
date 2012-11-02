@@ -1,0 +1,16 @@
+Changes
+LICENSE
+MANIFEST
+META.yml
+Makefile.PL
+README
+README.md
+bin/pingdom.pl
+dist.ini
+lib/Pingdom/Client.pm
+t/00-load.t
+t/manifest.t
+t/pod-coverage.t
+t/pod.t
+t/release-pod-coverage.t
+t/release-pod-syntax.t
