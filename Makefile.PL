@@ -12,21 +12,20 @@ my %WriteMakefileArgs = (
   "ABSTRACT" => "a perl implementation of a client for the Pingdom REST API.",
   "AUTHOR" => "Dominik Schulz <dominik.schulz\@gauner.org>",
   "BUILD_REQUIRES" => {
-    "Test::More" => 0
+    "Test::More" => 0,
+    "strict" => 0,
+    "warnings" => 0
   },
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
   },
   "DISTNAME" => "Pingdom-Client",
-  "EXE_FILES" => [
-    "bin/pingdom.pl"
-  ],
+  "EXE_FILES" => [],
   "LICENSE" => "perl",
   "NAME" => "Pingdom::Client",
   "PREREQ_PM" => {
     "Carp" => 0,
     "Data::Dumper" => 0,
-    "Getopt::Long" => 0,
     "JSON" => 0,
     "LWP::UserAgent" => 0,
     "Moose" => 0,
@@ -34,11 +33,9 @@ my %WriteMakefileArgs = (
     "URI::Escape" => 0,
     "feature" => 0,
     "mro" => 0,
-    "namespace::autoclean" => 0,
-    "strict" => 0,
-    "warnings" => 0
+    "namespace::autoclean" => 0
   },
-  "VERSION" => "0.11",
+  "VERSION" => "0.12",
   "test" => {
     "TESTS" => "t/*.t"
   }

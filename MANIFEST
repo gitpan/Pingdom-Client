@@ -1,6 +1,7 @@
 Changes
 LICENSE
 MANIFEST
+META.json
 META.yml
 Makefile.PL
 README
@@ -12,5 +13,7 @@ t/00-load.t
 t/manifest.t
 t/pod-coverage.t
 t/pod.t
-t/release-pod-coverage.t
+t/release-eol.t
+t/release-no-tabs.t
 t/release-pod-syntax.t
+weaver.ini

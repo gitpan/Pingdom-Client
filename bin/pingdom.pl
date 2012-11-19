@@ -12,15 +12,15 @@ my $password = undef;
 my $apikey = undef;
 
 GetOptions(
-	'username=s'	=> \$username,
-	'password=s'	=> \$password,
-	'apikey=s'	=> \$apikey,
+        'username=s'    => \$username,
+        'password=s'    => \$password,
+        'apikey=s'      => \$apikey,
 );
 
 my $API = Pingdom::Client::->new({
-	'username' => $username,
-	'password' => $password,
-	'apikey'   => $apikey,
+        'username' => $username,
+        'password' => $password,
+        'apikey'   => $apikey,
 });
 
 print Dumper($API->contacts());
@@ -28,9 +28,5 @@ print Dumper($API->contacts());
 =head1 NAME
 
 pingdom cli
-
-=head1 VERSION
-
-version 0.11
 
 =cut
