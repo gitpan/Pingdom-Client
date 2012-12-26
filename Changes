@@ -1,5 +1,8 @@
 Revision history for Pingdom-Client
 
+0.13	2012-12-26
+	Fix validation of Boolean arguments
+
 0.12	2012-11-19
 	Cleanup documentation.
 

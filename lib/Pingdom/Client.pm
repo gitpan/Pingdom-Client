@@ -1,9 +1,6 @@
 package Pingdom::Client;
 {
-  $Pingdom::Client::VERSION = '0.12';
-}
-BEGIN {
-  $Pingdom::Client::AUTHORITY = 'cpan:TEX';
+  $Pingdom::Client::VERSION = '0.13';
 }
 # ABSTRACT: a perl implementation of a client for the Pingdom REST API.
 
@@ -27,9 +24,9 @@ use URI::Escape ();
 # use MooseX::Params::Validate;
 
 has '_json' => (
-    'is'    => 'ro',
-    'isa'   => 'JSON',
-    'lazy'  => 1,
+    'is'        => 'ro',
+    'isa'       => 'JSON',
+    'lazy'      => 1,
     'builder' => '_init_json',
 );
 
@@ -40,13 +37,11 @@ has '_ua' => (
     'builder' => '_init_ua',
 );
 
-
 has 'username' => (
     'is'       => 'rw',
     'isa'      => 'Str',
     'required' => 1,
 );
-
 
 has 'password' => (
     'is'       => 'rw',
@@ -54,13 +49,11 @@ has 'password' => (
     'required' => 1,
 );
 
-
 has 'apikey' => (
     'is'    => 'rw',
     'isa'   => 'Str',
     'required' => 1,
 );
-
 
 has 'apiurl' => (
     'is'    => 'rw',
@@ -68,13 +61,11 @@ has 'apiurl' => (
     'default' => 'https://api.pingdom.com',
 );
 
-
 has 'apiversion' => (
     'is'    => 'rw',
     'isa'   => 'Str',
     'default' => '2.0',
 );
-
 
 has 'lasterror' => (
     'is'        => 'rw',
@@ -140,7 +131,7 @@ sub _validate_params {
                     return; # no int
                 }
             } elsif($ref->{$key} eq 'Bool') {
-                if($params->{$key} !~ m/^[01]$/) {
+                if($params->{$key} !~ m/^(?:true|false)$/) {
                     return; # no bool
                 }
             } elsif($ref->{$key} eq 'Ids') {
@@ -214,7 +205,6 @@ sub _api_call {
     }
 }
 
-
 sub actions {
     my $self = shift;
     my $params = shift;
@@ -240,7 +230,7 @@ sub actions {
     };
     if(!$self->_validate_params($ref,$params)) {
         $self->_set_lasterror(902,'Validate','Failed to validate params for method action');
-        return;
+            return;
     }
 
     my $method = 'GET';
@@ -250,7 +240,6 @@ sub actions {
 
     return $result;
 }
-
 
 sub analysis {
     my $self = shift;
@@ -270,7 +259,7 @@ sub analysis {
     };
     if(!$self->_validate_params($ref,$params)) {
         $self->_set_lasterror(902,'Validate','Failed to validate params for method analysis');
-        return;
+            return;
     }
 
     my $method = 'GET';
@@ -280,7 +269,6 @@ sub analysis {
 
     return $result;
 }
-
 
 sub analysis_raw {
     my $self = shift;
@@ -298,7 +286,6 @@ sub analysis_raw {
     return $result;
 }
 
-
 sub checks {
     my $self = shift;
     my $params = shift;
@@ -312,7 +299,7 @@ sub checks {
     };
     if(!$self->_validate_params($ref,$params)) {
         $self->_set_lasterror(902,'Validate','Failed to validate params for method checks');
-        return;
+            return;
     }
 
     my $method = 'GET';
@@ -322,7 +309,6 @@ sub checks {
 
     return $result;
 }
-
 
 sub check_details {
     my $self = shift;
@@ -338,7 +324,6 @@ sub check_details {
 
     return $result;
 }
-
 
 sub check_create {
     my $self = shift;
@@ -390,7 +375,7 @@ sub check_create {
     };
     if(!$self->_validate_params($ref,$params)) {
         $self->_set_lasterror(902,'Validate','Failed to validate params for method check_create');
-        return;
+            return;
     }
 
     my $method = 'POST';
@@ -400,7 +385,6 @@ sub check_create {
 
     return $result;
 }
-
 
 sub check_modify {
     my $self = shift;
@@ -439,7 +423,7 @@ sub check_modify {
     };
     if(!$self->_validate_params($ref,$params)) {
         $self->_set_lasterror(902,'Validate','Failed to validate params for method check_modify');
-        return;
+            return;
     }
 
     my $method = 'PUT';
@@ -449,7 +433,6 @@ sub check_modify {
 
     return $result;
 }
-
 
 sub check_modify_bulk {
     my $self = shift;
@@ -466,7 +449,7 @@ sub check_modify_bulk {
     };
     if(!$self->_validate_params($ref,$params)) {
         $self->_set_lasterror(902,'Validate','Failed to validate params for method check_modify_bulk');
-        return;
+            return;
     }
 
     my $method = 'PUT';
@@ -476,7 +459,6 @@ sub check_modify_bulk {
 
     return $result;
 }
-
 
 sub check_delete {
     my $self = shift;
@@ -492,7 +474,6 @@ sub check_delete {
 
     return $result;
 }
-
 
 sub contacts {
     my $self = shift;
@@ -517,7 +498,6 @@ sub contacts {
 
     return $result;
 }
-
 
 sub contact_create {
     my $self = shift;
@@ -555,7 +535,6 @@ sub contact_create {
     return $result;
 }
 
-
 sub contact_modify {
     my $self = shift;
     my $contact_id = shift;
@@ -592,7 +571,6 @@ sub contact_modify {
     return $result;
 }
 
-
 sub contact_delete {
     my $self = shift;
     my $contactid = shift;
@@ -608,7 +586,6 @@ sub contact_delete {
     return $result;
 }
 
-
 sub credits {
     my $self = shift;
 
@@ -622,7 +599,6 @@ sub credits {
 
     return $result;
 }
-
 
 sub probes {
     my $self = shift;
@@ -652,7 +628,6 @@ sub probes {
     return $result;
 }
 
-
 sub reference {
     my $self = shift;
 
@@ -667,7 +642,8 @@ sub reference {
     return $result;
 }
 
-
+# Method: Get Email Report Subscription List
+# Description: Returns a list of email report subscriptions.
 sub reports_email {
     my $self = shift;
 
@@ -682,7 +658,8 @@ sub reports_email {
     return $result;
 }
 
-
+# Method: Create Email Report
+# Description: Creates a new email report.
 sub reports_email_create {
     my $self = shift;
     my $params = shift;
@@ -716,7 +693,8 @@ sub reports_email_create {
     return $result;
 }
 
-
+# Method: Modify Email Report
+# Description: Modify an email report.
 sub reports_email_modify {
     my $self = shift;
     my $reportid = shift;
@@ -748,7 +726,8 @@ sub reports_email_modify {
     return $result;
 }
 
-
+# Method: Delete Email Report
+# Description: Delete an email report.
 sub reports_email_delete {
     my $self = shift;
     my $reportid = shift;
@@ -764,7 +743,8 @@ sub reports_email_delete {
     return $result;
 }
 
-
+# Method: Get Public Report List
+# Description: Returns a list of public (web-based) reports.
 sub reports_public {
     my $self = shift;
 
@@ -779,6 +759,8 @@ sub reports_public {
     return $result;
 }
 
+# Method: Publish Public Report
+# Description: Activate public report for a specified check.
 sub reports_public_create {
     my $self = shift;
     my $checkid = shift;
@@ -794,7 +776,8 @@ sub reports_public_create {
     return $result;
 }
 
-
+# Method: Withdraw Public Report
+# Description: Deactivate public report for a specified check.
 sub reports_public_delete {
     my $self = shift;
     my $checkid = shift;
@@ -810,7 +793,8 @@ sub reports_public_delete {
     return $result;
 }
 
-
+# Method: Get Shared Reports (Banners) List
+# Description: Returns a list of shared reports (banners).
 sub reports_shared {
     my $self = shift;
 
@@ -825,7 +809,8 @@ sub reports_shared {
     return $result;
 }
 
-
+# Method: Create Shared Report (Banner)
+# Description: Create a shared report (banner).
 sub reports_shared_create {
     my $self = shift;
     my $params = shift;
@@ -869,7 +854,6 @@ sub reports_shared_create {
     return $result;
 }
 
-
 # Method: Delete Shared Report (Banner)
 # Description: Delete a shared report (banner).
 sub reports_shared_delete {
@@ -887,7 +871,8 @@ sub reports_shared_delete {
     return $result;
 }
 
-
+# Method: Get Raw Check Results
+# Description: Return a list of raw test results for a specified check
 sub results {
     my $self = shift;
     my $checkid = shift;
@@ -927,7 +912,8 @@ sub results {
     return $result;
 }
 
-
+# Method: Get Current Server Time
+# Description: Get the current time of the API server.
 sub servertime {
     my $self = shift;
 
@@ -942,7 +928,8 @@ sub servertime {
     return $result;
 }
 
-
+# Method: Get Account Settings
+# Description: Returns all account-specific settings.
 sub settings {
     my $self = shift;
 
@@ -957,7 +944,8 @@ sub settings {
     return $result;
 }
 
-
+# Method: Modify Account Settings
+# Description: Modify account-specific settings.
 sub settings_modify {
     my $self = shift;
     my $params = shift;
@@ -1036,7 +1024,8 @@ sub settings_modify {
     return $result;
 }
 
-
+# Method: Get A Response Time / Uptime Average
+# Description: Get a summarized response time / uptime value for a specified check and time period.
 sub summary_average {
     my $self = shift;
     my $checkid = shift;
@@ -1070,7 +1059,8 @@ sub summary_average {
     return $result;
 }
 
-
+# Method: Get Response Time Averages For Each Hour Of The Day
+# Description: Returns the average response time for each hour of the day (0-23) for a specific check over a selected time period. I.e. it shows you what an average day looks like during that time period.
 sub summary_hoursofday {
     my $self = shift;
     my $checkid = shift;
@@ -1100,7 +1090,8 @@ sub summary_hoursofday {
     return $result;
 }
 
-
+# Method: Get Outages List
+# Description: Get a list of status changes for a specified check and time period.
 sub summary_outage {
     my $self = shift;
     my $checkid = shift;
@@ -1128,7 +1119,8 @@ sub summary_outage {
     return $result;
 }
 
-
+# Method: Get Intervals Of Average Response Time And Uptime
+# Description: Get the average response time and uptime for a list of intervals. Useful for generating graphs.
 sub summary_performance {
     my $self = shift;
     my $checkid = shift;
@@ -1162,7 +1154,8 @@ sub summary_performance {
     return $result;
 }
 
-
+# Method: Get Active Probes For A Period
+# Description: Get a list of probes that performed tests for a specified check during a specified period.
 sub summary_probes {
     my $self = shift;
     my $checkid = shift;
@@ -1188,7 +1181,8 @@ sub summary_probes {
     return $result;
 }
 
-
+# Method: Make A Single Test
+# Description: Performs a single test using a specified Pingdom probe against a specified target. Please note that this method is meant to be used sparingly, not to set up your own monitoring solution.
 sub single {
     my $self = shift;
     my $params = shift;
@@ -1231,7 +1225,8 @@ sub single {
     return $result;
 }
 
-
+# Method: Make A Traceroute
+# Description: Perform a traceroute to a specified target from a specified Pingdom probe.
 sub traceroute {
     my $self = shift;
     my $params = shift;
@@ -1284,38 +1279,6 @@ Pingdom::Client - a perl implementation of a client for the Pingdom REST API.
     });
     print $API->contacts();
 
-=head1 DESCRIPTION
-
-This class provides an client to the Pingdom REST API.
-
-=head1 ATTRIBUTES
-
-=head2 username
-
-The pingdom username.
-
-=head2 password
-
-The pingdom password.
-
-=head2 apikey
-
-The pingdom API key. Can be generated in your Pingdom profile.
-
-=head2 apiurl
-
-The Pingdom API endpoint. Defaults to https://api.pingdom.com.
-
-=head2 apiversion
-
-The version of the Pingdom API this client implements.
-
-At the time of this writing this must be 2.0.
-
-=head2 lasterror
-
-Records the last API error.
-
 =head1 METHODS
 
 =head2 actions
@@ -1328,22 +1291,19 @@ Returns a list of the latest error analysis results for a specified check.
 
 =head2 analysis_raw
 
-Returns the raw result for a specified error analysis.
-This data is primarily intended for internal use, but you might be interested in it as well.
-However, there is no real documentation for this data at the moment.
-In the future, we may add a new API method that provides a more user-friendly format.
-
-=head2 checks
-
-Returns a list overview of all checks.
-
-=head2 check_details
-
-Returns a detailed description of a specified check.
+Returns the raw result for a specified error analysis. This data is primarily intended for internal use, but you might be interested in it as well. However, there is no real documentation for this data at the moment. In the future, we may add a new API method that provides a more user-friendly format.
 
 =head2 check_create
 
 Creates a new check with settings specified by provided parameters.
+
+=head2 check_delete
+
+Deletes a check. THIS METHOD IS IRREVERSIBLE! You will lose all collected data. Be careful!
+
+=head2 check_details
+
+Returns a detailed description of a specified check.
 
 =head2 check_modify
 
@@ -1353,25 +1313,25 @@ Modify settings for a check. The provided settings will overwrite previous value
 
 Pause or change resolution for multiple checks in one bulk call.
 
-=head2 check_delete
+=head2 checks
 
-Deletes a check. THIS METHOD IS IRREVERSIBLE! You will lose all collected data. Be careful!
-
-=head2 contacts
-
-Returns a list of all contacts.
+Returns a list overview of all checks.
 
 =head2 contact_create
 
 Create a new contact.
 
+=head2 contact_delete
+
+Deletes a contact.
+
 =head2 contact_modify
 
 Modify a contact.
 
-=head2 contact_delete
+=head2 contacts
 
-Deletes a contact.
+Returns a list of all contacts.
 
 =head2 credits
 
@@ -1391,15 +1351,15 @@ Returns a list of email report subscriptions.
 
 =head2 reports_email_create
 
-Creates a new email report
-
-=head2 reports_email_modify
-
-Modify an email report.
+Creates a new email report.
 
 =head2 reports_email_delete
 
 Delete an email report.
+
+=head2 reports_email_modify
+
+Modify an email report.
 
 =head2 reports_public
 
@@ -1441,6 +1401,10 @@ Returns all account-specific settings.
 
 Modify account-specific settings.
 
+=head2 single
+
+Performs a single test using a specified Pingdom probe against a specified target. Please note that this method is meant to be used sparingly, not to set up your own monitoring solution.
+
 =head2 summary_average
 
 Get a summarized response time / uptime value for a specified check and time period.
@@ -1461,58 +1425,9 @@ Get the average response time and uptime for a list of intervals. Useful for gen
 
 Get a list of probes that performed tests for a specified check during a specified period.
 
-=head2 single
-
-Performs a single test using a specified Pingdom probe against a specified target. Please note that this method is meant to be used sparingly, not to set up your own monitoring solution.
-
 =head2 traceroute
 
 Perform a traceroute to a specified target from a specified Pingdom probe.
-
-=head1 NAME
-
-Pingdom::Client - a perl implementation of the Pingdom REST API.
-
-=head1 DEPENDENCIES
-
-=over
-
-=item Moose
-
-=item JSON
-
-=item LWP
-
-=item Try::Tiny
-
-=item URI
-
-=back
-
-=head1 INCOMPATIBILITIES
-
-None known.
-
-=head1 BUGS AND LIMITATIONS
-
-There are no known bugs in this module.
-Please report problems to Dominik Schulz (dominik.schulz@gauner.org)
-Patches are welcome.
-
-=head1 AUTHOR
-
-Dominik Schulz, C<< <dominik.schulz at gauner.org> >>
-
-=head1 LICENSE AND COPYRIGHT
-
-Copyright 2012 Dominik Schulz.
-
-This module is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself. See L<perlartistic>.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 =head1 AUTHOR
 
